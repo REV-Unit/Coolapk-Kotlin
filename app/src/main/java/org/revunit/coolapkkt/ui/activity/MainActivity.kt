@@ -19,6 +19,7 @@ import org.revunit.coolapkkt.network.Client
 import org.revunit.coolapkkt.network.data.response.PicIndexData
 import org.revunit.coolapkkt.ui.adapter.MainPageFragmentRecommendRecyclerViewAdapter
 import org.revunit.coolapkkt.ui.adapter.MainPageRecyclerViewAdapter
+import org.revunit.coolapkkt.utils.DeviceUtils
 
 class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var mainViewBinding: ActivityMainBinding
@@ -50,7 +51,12 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         categoryAdapter = MainPageRecyclerViewAdapter()
         with(mainViewBinding.fragmentMainPage.fragmentMainPageRecyclerView) {
             val layoutManager =
-                GridLayoutManager(this@MainActivity, 2, GridLayoutManager.VERTICAL, false)
+                GridLayoutManager(
+                    this@MainActivity,
+                    if (DeviceUtils.isScreenOrientationLandscape()) 2 else 1,
+                    GridLayoutManager.VERTICAL,
+                    false
+                )
             this.layoutManager = layoutManager
             this.adapter = categoryAdapter
         }
@@ -96,8 +102,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         } catch (e: Exception) {
             e.printStackTrace()
             null
-        }
-        if (data==null) return
+        } ?: return
         if (page == 1) {//第一页
             recommendAdapter.setList(data.data)
         } else {

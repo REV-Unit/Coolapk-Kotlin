@@ -64,7 +64,7 @@ class MainPageFragmentRecommendRecyclerViewAdapter(
             if (imageView == null || url == null) return
             val h = calculateImageHeight(intArrayOf(picWidth, picHeight))
             val lp = imageView.layoutParams
-            lp.height =h
+            lp.height =h.coerceAtMost(imageView.maxHeight)
             imageView.layoutParams = lp
             setImage(imageView, url)
         }
@@ -93,7 +93,7 @@ class MainPageFragmentRecommendRecyclerViewAdapter(
             val width = imageSize[0]
             val height = imageSize[1]
             var w = if (DeviceUtils.isTabletDevice()) {
-                ScaleUtils.getScreenWidthPixels() * 0.6
+                ScaleUtils.getScreenWidthPixels() * 0.7
             } else {
                 ScaleUtils.getScreenWidthPixels()
             }.toInt() - 8 * 4

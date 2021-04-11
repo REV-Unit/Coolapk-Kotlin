@@ -1,5 +1,6 @@
 package org.revunit.coolapkkt.utils
 
+import android.content.Context
 import android.content.res.Configuration
 import org.revunit.coolapkkt.CoolapkKotlinApplication
 
@@ -12,5 +13,14 @@ object DeviceUtils {
         return CoolapkKotlinApplication.myApplicationContext.resources
             .configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >=
                 Configuration.SCREENLAYOUT_SIZE_LARGE
+    }
+
+    /**
+     * 判断是否是横屏
+     * @param context
+     * @return Boolean
+     */
+    fun isScreenOrientationLandscape(context: Context=CoolapkKotlinApplication.myApplicationContext):Boolean{
+        return context.resources.configuration.orientation==Configuration.ORIENTATION_LANDSCAPE
     }
 }
