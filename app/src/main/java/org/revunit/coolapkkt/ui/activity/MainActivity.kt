@@ -1,10 +1,9 @@
 package org.revunit.coolapkkt.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -12,11 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.revunit.coolapkkt.Constants
 import org.revunit.coolapkkt.data.MainPageCoolPicCategory
 import org.revunit.coolapkkt.databinding.ActivityMainBinding
 import org.revunit.coolapkkt.databinding.LayoutErrorDetailsBinding
 import org.revunit.coolapkkt.network.Client
 import org.revunit.coolapkkt.network.data.response.PicIndexData
+import org.revunit.coolapkkt.network.data.response.PicRecommendData
 import org.revunit.coolapkkt.ui.adapter.MainPageFragmentRecommendRecyclerViewAdapter
 import org.revunit.coolapkkt.ui.adapter.MainPageRecyclerViewAdapter
 import org.revunit.coolapkkt.utils.DeviceUtils
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             val layoutManager =
                 GridLayoutManager(
                     this@MainActivity,
-                    if (DeviceUtils.isScreenOrientationLandscape()) 2 else 1,
+                    2,
                     GridLayoutManager.VERTICAL,
                     false
                 )
@@ -69,6 +70,16 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             this.layoutManager = layoutManager
             this.adapter = recommendAdapter
+        }
+        recommendAdapter.setOnItemClickListener { adapter, view, position ->
+            val data = adapter.data[position] as PicRecommendData.DataBean
+            val bundle = Bundle().also {
+                it.putLong(Constants.IntentExtra.postId, data.id!!.toLong())
+            }
+            val intent = Intent(this, CoolPicDetailsActivity::class.java).also {
+                it.putExtras(bundle)
+            }
+            startActivity(intent)
         }
     }
 
@@ -138,5 +149,4 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         }
         return list
     }
-
 }

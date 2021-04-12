@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar_image"
                     avatar="@{avatarImageUrl}"
                     android:layout_width="40dp"
@@ -76,7 +76,7 @@
                     android:id="@+id/nick_name"
                     android:layout_width="0dp"
                     android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center"
                     android:layout_weight="1.0"
                     android:maxLines="1"
                     android:text="@{nickname}"

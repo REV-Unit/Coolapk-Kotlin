@@ -28,4 +28,6 @@ object Client {
     ) = service.getPicDataList(title, page)
 
     suspend fun getPicRecommendList(page: Int)= service.getRecommendData(page)
+
+    suspend fun getPostInfoData(postId:Long)= service.getPostInfoData(postId)
 }
