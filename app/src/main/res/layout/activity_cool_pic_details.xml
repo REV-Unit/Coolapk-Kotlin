@@ -107,7 +107,7 @@
             app:layout_constraintTop_toTopOf="@+id/post_id"
             tools:text="分辨率：1234x45678" />
 
-        <androidx.viewpager.widget.ViewPager
+        <org.revunit.coolapkkt.ui.view.MyViewPagerForPhotoView
             android:id="@+id/images"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -118,9 +118,7 @@
             app:layout_constraintBottom_toTopOf="@+id/post_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3">
-
-        </androidx.viewpager.widget.ViewPager>
+            app:layout_constraintTop_toBottomOf="@+id/textView3"/>
 
         <TextView
             android:id="@+id/post_time"

@@ -55,7 +55,7 @@ class CoolPicDetailsActivity : AppCompatActivity(), ViewPager.OnPageChangeListen
             binding.postTimestamp = data.data!!.dateline
             binding.postIdLong = data.data!!.id.toLong()
             imageCount = data.data!!.picArr?.size ?: 0
-            binding.picCountStr="1 / ${imageCount}"
+            binding.picCountStr="1 / $imageCount"
             initViewPager(data.data!!.picArr as ArrayList<String>)
         }
     }
