@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CoolPicDetailsActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
+class CoolPicDetailsActivity : BaseActivity(), ViewPager.OnPageChangeListener {
     private lateinit var binding: ActivityCoolPicDetailsBinding
     private var imageCount = 0
     private var postId = 0L
@@ -55,7 +55,7 @@ class CoolPicDetailsActivity : AppCompatActivity(), ViewPager.OnPageChangeListen
             binding.postTimestamp = data.data!!.dateline
             binding.postIdLong = data.data!!.id.toLong()
             imageCount = data.data!!.picArr?.size ?: 0
-            binding.picCountStr="1 / $imageCount"
+            binding.picCountStr = "1 / $imageCount"
             initViewPager(data.data!!.picArr as ArrayList<String>)
         }
     }

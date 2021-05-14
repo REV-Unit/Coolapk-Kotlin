@@ -20,7 +20,7 @@ object DeviceUtils {
      * @param context
      * @return Boolean
      */
-    fun isScreenOrientationLandscape(context: Context=CoolapkKotlinApplication.myApplicationContext):Boolean{
-        return context.resources.configuration.orientation==Configuration.ORIENTATION_LANDSCAPE
+    fun isScreenOrientationLandscape(context: Context = CoolapkKotlinApplication.myApplicationContext): Boolean {
+        return context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
     }
 }

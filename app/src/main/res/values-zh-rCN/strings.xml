@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Coolapk Kotlin</string>
+    <string name="view_recommend_pic">查看推荐</string>
+    <string name="recommend">推荐</string>
 </resources>

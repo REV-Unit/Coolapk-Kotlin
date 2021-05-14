@@ -7,7 +7,7 @@ object Constants {
     const val appCode = 2003081
     const val host = "api.coolapk.com"
 
-    object IntentExtra{
-        const val postId="POST_ID"
+    object IntentExtra {
+        const val postId = "POST_ID"
     }
 }

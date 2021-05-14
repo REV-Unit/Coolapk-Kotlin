@@ -13,8 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CoolapkKt">
-        <activity android:name=".ui.activity.CoolPicDetailsActivity"
-            android:theme="@style/Theme.CoolapkKt.DialogActivity"/>
+        <activity
+            android:name=".ui.activity.CoolPicRecommendActivity"
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:label="@string/recommend" />
+        <activity
+            android:name=".ui.activity.CoolPicDetailsActivity"
+            android:theme="@style/Theme.CoolapkKt.DialogActivity" />
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -48,7 +48,7 @@ interface Api {
     @GET("/v6/feed/detail")
     suspend fun getPostInfoData(
         @Query("id") postId: Long,
-        @Query("rid") rid:String="noticeId",
-        @Query("fromApi") fromApi:String=""
+        @Query("rid") rid: String = "noticeId",
+        @Query("fromApi") fromApi: String = ""
     ): PostInfoData
 }

@@ -1,7 +1,7 @@
 package org.revunit.coolapkkt.network
 
-import org.revunit.coolapkkt.AppConfig
 import okhttp3.OkHttpClient
+import org.revunit.coolapkkt.AppConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -27,7 +27,7 @@ object Client {
         page: Int,
     ) = service.getPicDataList(title, page)
 
-    suspend fun getPicRecommendList(page: Int)= service.getRecommendData(page)
+    suspend fun getPicRecommendList(page: Int) = service.getRecommendData(page)
 
-    suspend fun getPostInfoData(postId:Long)= service.getPostInfoData(postId)
+    suspend fun getPostInfoData(postId: Long) = service.getPostInfoData(postId)
 }

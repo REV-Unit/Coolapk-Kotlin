@@ -4,19 +4,19 @@ import android.os.Build
 import android.text.Html
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import org.revunit.coolapkkt.R
 import org.revunit.coolapkkt.databinding.ItemPicRecommendBinding
 import org.revunit.coolapkkt.network.data.response.PicRecommendData
-import org.revunit.coolapkkt.utils.DeviceUtils
-import org.revunit.coolapkkt.utils.ScaleUtils
 
 class MainPageFragmentRecommendRecyclerViewAdapter(
     private val mData: ArrayList<PicRecommendData.DataBean> = ArrayList()
@@ -31,14 +31,25 @@ class MainPageFragmentRecommendRecyclerViewAdapter(
 
     override fun convert(holder: BaseViewHolder, item: PicRecommendData.DataBean) {
         val binding = DataBindingUtil.getBinding<ItemPicRecommendBinding>(holder.itemView)!!
+        val imageView = binding.picImage
+        val layoutParams = imageView.layoutParams as ConstraintLayout.LayoutParams
+        val imageSizeArray = item.label!!.split("x").map { it.toInt() }
+        val imageWidth = imageSizeArray[0]
+        val imageHeight = imageSizeArray[1]
+        layoutParams.dimensionRatio = when {
+            // 高度:宽度>=3:1时，设置 image view 的宽高比为1:3
+            imageHeight / imageWidth >= 3 -> "1:3"
+            // 宽度:高度>=2:1时，设置 image view 的宽高比为2:1
+            imageWidth / imageHeight >= 2 -> "2:1"
+            // 其他比例，直接使用原始比例
+            else -> "$imageWidth:$imageHeight"
+        }
+        imageView.layoutParams = layoutParams
+
         binding.headerImageUrl = item.pic
         binding.content = item.message
         binding.nickname = item.username
         binding.avatarImageUrl = item.userAvatar
-        with(item.label!!.split("x")) {
-            binding.headerImageWidth = this[0].toInt()
-            binding.headerImageHeight = this[1].toInt()
-        }
     }
 
     fun addData(newData: List<PicRecommendData.DataBean>?) {
@@ -62,16 +73,19 @@ class MainPageFragmentRecommendRecyclerViewAdapter(
             picHeight: Int,
         ) {
             if (imageView == null || url == null) return
-            val h = calculateImageHeight(intArrayOf(picWidth, picHeight))
-            val lp = imageView.layoutParams
-            lp.height =h.coerceAtMost(imageView.maxHeight)
-            imageView.layoutParams = lp
-            setImage(imageView, url)
+            Glide.with(imageView)
+                .load(url)
+                .priority(Priority.HIGH)
+                .override(picWidth, picHeight)
+                .into(imageView)
         }
 
         @JvmStatic
         @BindingAdapter("avatar")
-        fun setAvatarImage(imageView: ImageView?, url: String?) = setImage(imageView, url)
+        fun setAvatarImage(imageView: ImageView?, url: String?) {
+            if (imageView == null || url == null) return
+            Glide.with(imageView).load(url).into(imageView)
+        }
 
         @JvmStatic
         @BindingAdapter("content")
@@ -82,24 +96,6 @@ class MainPageFragmentRecommendRecyclerViewAdapter(
             } else {
                 textView.text = Html.fromHtml(text)
             }
-        }
-
-        private fun setImage(imageView: ImageView?, url: String?) {
-            if (imageView == null || url == null) return
-            Glide.with(imageView).load(url).into(imageView)
-        }
-
-        private fun calculateImageHeight(imageSize: IntArray): Int {
-            val width = imageSize[0]
-            val height = imageSize[1]
-            var w = if (DeviceUtils.isTabletDevice()) {
-                ScaleUtils.getScreenWidthPixels() * 0.7
-            } else {
-                ScaleUtils.getScreenWidthPixels()
-            }.toInt() - 8 * 4
-            w /= 2
-            val h = height * w / width.toFloat()
-            return h.toInt()
         }
     }
 }

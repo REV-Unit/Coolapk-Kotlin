@@ -249,6 +249,7 @@ data class PicRecommendData(var data: List<DataBean>? = null) {
             var verify_label: String? = null,
             var verify_title: String? = null
         )
+
         /**
          * id : 3036
          * logo : http://image.coolapk.com/dyh_logo/2019/0218/12/ab1cbaa511891eb84d340532cd55864e-dyh-uid-691103@694x694.jpg
@@ -257,7 +258,7 @@ data class PicRecommendData(var data: List<DataBean>? = null) {
          * entityType : feedRelation
          */
         data class RelationRowsBean(
-            var id:Int = 0,
+            var id: Int = 0,
             var logo: String? = null,
             var title: String? = null,
             var url: String? = null,

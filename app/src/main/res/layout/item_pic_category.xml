@@ -22,16 +22,17 @@
 
         <ImageView
             android:id="@+id/item_pic_category_image_view"
+            categoryImage="@{imageUrl}"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:scaleType="fitCenter"
-            categoryImage="@{imageUrl}"
             tools:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/item_pic_category_text_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
             android:gravity="center"
             android:maxLines="2"
             android:text="@{description}"

@@ -66,4 +66,5 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation 'org.greenrobot:eventbus:3.2.0'
 }

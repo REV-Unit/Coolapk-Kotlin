@@ -1,7 +1,5 @@
 package org.revunit.coolapkkt.utils
 
-import android.view.View
-import android.view.ViewGroup
 import org.revunit.coolapkkt.CoolapkKotlinApplication
 
 
